@@ -1,13 +1,13 @@
 import React, { Fragment } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 
 const styles = StyleSheet.create({
 	listItem: {
 		borderWidth: 1,
 		margin: 5,
-        width: "80%",
-        flexDirection: "row",
-        alignItems: "center"
+		width: "80%",
+		flexDirection: "row",
+		alignItems: "center"
 	},
 	text: {
 		padding: 5,
@@ -20,15 +20,19 @@ const styles = StyleSheet.create({
 	}
 });
 
-const TodoList = ({ todos }) => (
+const TodoList = ({ todos, onUpdate }) => (
 	<Fragment>
 		{todos.map(todo => (
-			<View style={styles.listItem} key={todo.text}>
-                <Text style={styles.text}>-</Text>
+			<TouchableOpacity
+				style={styles.listItem}
+				key={todo.text}
+				onPress={() => onUpdate({ ...todo, done: !todo.done })}
+			>
+				<Text style={styles.text}>-</Text>
 				<Text style={[styles.text, todo.done && styles.textDone]}>
 					{todo.text}
 				</Text>
-			</View>
+			</TouchableOpacity>
 		))}
 	</Fragment>
 );

@@ -1,7 +1,19 @@
 import React, { Component } from "react";
-import { SafeAreaView, StyleSheet, Text, View, TextInput } from "react-native";
+import {
+	SafeAreaView,
+	StyleSheet,
+	Text,
+	View,
+	TextInput,
+	Button
+} from "react-native";
 import TodoList from "todoList/src/components/TodoList/index";
-import { getTodos } from "todoList/src/data/todos";
+import {
+	getTodos,
+	addTodo,
+	updateTodo,
+	deleteTodo
+} from "todoList/src/data/todos";
 
 const styles = StyleSheet.create({
 	container: {
@@ -15,8 +27,12 @@ const styles = StyleSheet.create({
 		fontWeight: "bold",
 		margin: 4
 	},
+	addRow: {
+		flexDirection: "row",
+		width: "80%"
+	},
 	text: {
-		width: "80%",
+		flex: 1,
 		borderBottomWidth: 1,
 		padding: 5
 	}
@@ -36,6 +52,18 @@ class MainScreen extends Component {
 		this.setState({ todos: getTodos() });
 	};
 
+	handleAdd = () => {
+		const { todos, newTodo } = this.state;
+		const newList = addTodo(todos, { text: newTodo });
+		this.setState({ todos: newList, newTodo: null });
+	};
+
+	handleUpdate = todo => {
+		const { todos } = this.state;
+		const newList = updateTodo(todos, todo);
+		this.setState({ todos: newList });
+	};
+
 	render() {
 		const { todos, newTodo } = this.state;
 		return (
@@ -43,16 +71,19 @@ class MainScreen extends Component {
 				<Text style={styles.title} selectable>
 					ToDo List App
 				</Text>
-				<TextInput
-					placeholder="Nuevo ToDo"
-					value={newTodo}
-					onChangeText={todo => this.setState({ newTodo: todo })}
-					style={styles.text}
-					autoCapitalize="words"
-					clearButtonMode="always"
-					returnKeyType="done"
-				/>
-				<TodoList todos={todos} />
+				<View style={styles.addRow}>
+					<TextInput
+						placeholder="Nuevo ToDo"
+						value={newTodo}
+						onChangeText={todo => this.setState({ newTodo: todo })}
+						style={styles.text}
+						autoCapitalize="words"
+						clearButtonMode="always"
+						returnKeyType="done"
+					/>
+					<Button onPress={this.handleAdd} title="Añadir" />
+				</View>
+				<TodoList todos={todos} onUpdate={this.handleUpdate} />
 			</SafeAreaView>
 		);
 	}
