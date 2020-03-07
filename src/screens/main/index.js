@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import TodoList from "todoList/src/components/TodoList/index"
+import TodoList from "todoList/src/components/TodoList/index";
+import {getTodos} from "todoList/src/data/todos";
 
 const styles = StyleSheet.create({
     container: {
@@ -11,19 +12,25 @@ const styles = StyleSheet.create({
     },
   });
 
-const todos = [
-    { text: "Tarea 1", done: false },
-    { text: "Tarea 2", done: false },
-    { text: "Tarea 3", done: false },
-    { text: "Tarea 4", done: true }
-];
-
 class MainScreen extends Component{
+    constructor(props) {
+      super(props)
+    
+      this.state = {
+        todos: []
+      };
+    };
+    
+    componentDidMount = () => {
+        this.setState({ todos: getTodos() });
+    }
+
     render (){
+
         return(
             <View style= {styles.container}>
                 <Text selectable>ToDo List App</Text>
-                <TodoList todos={todos}/>
+                <TodoList todos={this.state.todos}/>
             </View>
         );
     } 
