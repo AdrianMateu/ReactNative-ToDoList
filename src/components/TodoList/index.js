@@ -1,7 +1,10 @@
 import React, { Fragment } from "react";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
 
 const styles = StyleSheet.create({
+	container: {
+		width: "100%"
+	},
 	listItem: {
 		borderWidth: 1,
 		margin: 5,
@@ -36,7 +39,7 @@ const styles = StyleSheet.create({
 });
 
 const TodoList = ({ todos, onUpdate, onDelete }) => (
-	<Fragment>
+	<ScrollView contentContainerStyle={styles.container}>
 		{todos.map(todo => (
 			<TouchableOpacity
 				style={styles.listItem}
@@ -52,7 +55,7 @@ const TodoList = ({ todos, onUpdate, onDelete }) => (
 				</TouchableOpacity>
 			</TouchableOpacity>
 		))}
-	</Fragment>
+	</ScrollView>
 );
 
 export default TodoList;
