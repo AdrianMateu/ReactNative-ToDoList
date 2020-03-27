@@ -64,6 +64,12 @@ class MainScreen extends Component {
 		this.setState({ todos: newList });
 	};
 
+	handleDelte = todo => {
+		const { todos } = this.state;
+		const newList = deleteTodo(todos, todo);
+		this.setState({ todos: newList });
+	};
+
 	render() {
 		const { todos, newTodo } = this.state;
 		return (
@@ -83,7 +89,7 @@ class MainScreen extends Component {
 					/>
 					<Button onPress={this.handleAdd} title="Añadir" />
 				</View>
-				<TodoList todos={todos} onUpdate={this.handleUpdate} />
+				<TodoList todos={todos} onUpdate={this.handleUpdate} onDelete={this.handleDelte}/>
 			</SafeAreaView>
 		);
 	}

@@ -9,7 +9,12 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center"
 	},
+	bullet:{
+		padding: 5,
+		fontWeight: "bold"
+	},
 	text: {
+		flex: 1,
 		padding: 5,
 		fontWeight: "bold"
 	},
@@ -17,10 +22,20 @@ const styles = StyleSheet.create({
 		color: "#aaa",
 		textDecorationLine: "line-through",
 		fontWeight: "normal"
+	},
+	delete: {
+		width: 44,
+		height: 44,
+		alignItems: "center",
+		justifyContent: "center"
+	},
+	deleteText: {
+		color: "#ff0000",
+		fontSize: 18
 	}
 });
 
-const TodoList = ({ todos, onUpdate }) => (
+const TodoList = ({ todos, onUpdate, onDelete }) => (
 	<Fragment>
 		{todos.map(todo => (
 			<TouchableOpacity
@@ -28,10 +43,13 @@ const TodoList = ({ todos, onUpdate }) => (
 				key={todo.text}
 				onPress={() => onUpdate({ ...todo, done: !todo.done })}
 			>
-				<Text style={styles.text}>-</Text>
+				<Text style={styles.bullet}>-</Text>
 				<Text style={[styles.text, todo.done && styles.textDone]}>
 					{todo.text}
 				</Text>
+				<TouchableOpacity style={styles.delete} onPress={() => onDelete(todo)}>
+					<Text style={styles.deleteText}>X</Text>
+				</TouchableOpacity>
 			</TouchableOpacity>
 		))}
 	</Fragment>
