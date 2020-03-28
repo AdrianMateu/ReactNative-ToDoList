@@ -86,6 +86,13 @@ class MainScreen extends Component {
 		this.setState({ addModalVisible: !this.state.addModalVisible });
 	};
 
+	openEditTodo = todo => {
+		this.props.navigation.navigate("Edit", {
+			todo,
+			onSave: this.handleUpdate
+		});
+	};
+
 	render() {
 		const { todos, newTodo, loading, addModalVisible } = this.state;
 		return (
@@ -102,6 +109,7 @@ class MainScreen extends Component {
 						todos={todos}
 						onUpdate={this.handleUpdate}
 						onDelete={this.handleDelte}
+						onEdit={this.openEditTodo}
 					/>
 				)}
 				<FAB

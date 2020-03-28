@@ -6,9 +6,9 @@ import {
 	TextInput,
 	TouchableOpacity,
 	View,
-	Button,
-	Picker
+	Button
 } from "react-native";
+import BasicAddItems from "todoList/src/components/BasicAddItems";
 
 const styles = StyleSheet.create({
 	container: {
@@ -73,42 +73,20 @@ export default class AddTodo extends Component {
 		const { visible, onCloseModal } = this.props;
 		const { text, priority, description } = this.state;
 		return (
-			<Modal animationType="slide" transparent={true} visible={visible}>
+			<Modal
+				animationType="slide"
+				transparent={true}
+				visible={visible}
+				onRequestClose={onCloseModal}
+			>
 				<View style={styles.container}>
 					<View style={styles.content}>
-						<View style={styles.block}>
-							<Text>Título</Text>
-							<TextInput
-								style={styles.text}
-								value={text}
-								onChangeText={text => this.setState({ text })}
-								clearButtonMode="always"
-							/>
-						</View>
-						<View style={styles.block}>
-							<Text>Descripción</Text>
-							<TextInput
-								style={styles.text}
-								value={description}
-								onChangeText={text =>
-									this.setState({ description })
-								}
-								clearButtonMode="always"
-							/>
-						</View>
-						<View style={styles.block}>
-							<Text>Prioridad</Text>
-							<Picker
-								selectedValue={priority}
-								onValueChange={priority =>
-									this.setState({ priority })
-								}
-							>
-								{priorities.map((item, idx) => (
-									<Picker.Item label={item} value={idx} />
-								))}
-							</Picker>
-						</View>
+						<BasicAddItems
+							text={text}
+							description={description}
+							priority={priority}
+							onChange={newState => this.setState(newState)}
+						/>
 						<View style={styles.buttonRow}>
 							<Button
 								title="Cerrar"
