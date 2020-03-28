@@ -5,7 +5,8 @@ import {
 	Text,
 	View,
 	TextInput,
-	Button
+	Button,
+	ActivityIndicator
 } from "react-native";
 import TodoList from "todoList/src/components/TodoList/index";
 import {
@@ -35,6 +36,9 @@ const styles = StyleSheet.create({
 		flex: 1,
 		borderBottomWidth: 1,
 		padding: 5
+	},
+	loading: {
+		flex: 1
 	}
 });
 
@@ -44,12 +48,14 @@ class MainScreen extends Component {
 
 		this.state = {
 			todos: [],
-			newTodo: null
+			newTodo: null,
+			loading: true
 		};
 	}
 
-	componentDidMount = () => {
-		this.setState({ todos: getTodos() });
+	componentDidMount = async () => {
+		const todos = await getTodos();
+		this.setState({ todos: todos, loading: false });
 	};
 
 	handleAdd = () => {
@@ -71,7 +77,7 @@ class MainScreen extends Component {
 	};
 
 	render() {
-		const { todos, newTodo } = this.state;
+		const { todos, newTodo, loading } = this.state;
 		return (
 			<SafeAreaView style={styles.container}>
 				<Text style={styles.title} selectable>
@@ -89,7 +95,20 @@ class MainScreen extends Component {
 					/>
 					<Button onPress={this.handleAdd} title="Añadir" />
 				</View>
-				<TodoList todos={todos} onUpdate={this.handleUpdate} onDelete={this.handleDelte}/>
+				{loading && (
+					<ActivityIndicator
+						style={styles.loading}
+						size="large"
+						color="#0066ff"
+					/>
+				)}
+				{!loading && (
+					<TodoList
+						todos={todos}
+						onUpdate={this.handleUpdate}
+						onDelete={this.handleDelte}
+					/>
+				)}
 			</SafeAreaView>
 		);
 	}
