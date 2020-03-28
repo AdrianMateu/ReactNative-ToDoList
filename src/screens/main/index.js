@@ -6,7 +6,8 @@ import {
 	View,
 	TextInput,
 	Button,
-	ActivityIndicator
+	ActivityIndicator,
+	Alert
 } from "react-native";
 import TodoList from "todoList/src/components/TodoList/index";
 import {
@@ -71,6 +72,20 @@ class MainScreen extends Component {
 	};
 
 	handleDelte = todo => {
+		Alert.alert("¿Quere eliminar tarea?", todo.text, [
+			{
+				text: "Cancelar",
+				style: "cancel"
+			},
+			{
+				text: "OK",
+				onPress: () => {
+					const { todos } = this.state;
+					const newList = deleteTodo(todos, todo);
+					this.setState({ todos: newList });
+				}
+			}
+		]);
 		const { todos } = this.state;
 		const newList = deleteTodo(todos, todo);
 		this.setState({ todos: newList });
