@@ -5,12 +5,12 @@ import {
 	Text,
 	View,
 	TextInput,
-	Button,
 	ActivityIndicator,
 	Alert
 } from "react-native";
 import TodoList from "todoList/src/components/TodoList/index";
 import AddTodo from "todoList/src/components/AddTodo/index";
+import FAB from "todoList/src/components/FAB/index";
 import {
 	getTodos,
 	addTodo,
@@ -29,15 +29,6 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		fontWeight: "bold",
 		margin: 4
-	},
-	addRow: {
-		flexDirection: "row",
-		width: "80%"
-	},
-	text: {
-		flex: 1,
-		borderBottomWidth: 1,
-		padding: 5
 	},
 	loading: {
 		flex: 1
@@ -104,18 +95,6 @@ class MainScreen extends Component {
 				<Text style={styles.title} selectable>
 					ToDo List App
 				</Text>
-				<View style={styles.addRow}>
-					<TextInput
-						placeholder="Nuevo ToDo"
-						value={newTodo}
-						onChangeText={todo => this.setState({ newTodo: todo })}
-						style={styles.text}
-						autoCapitalize="words"
-						clearButtonMode="always"
-						returnKeyType="done"
-					/>
-					<Button onPress={this.toggleModal} title="Añadir" />
-				</View>
 				{loading && (
 					<ActivityIndicator
 						style={styles.loading}
@@ -130,6 +109,12 @@ class MainScreen extends Component {
 						onDelete={this.handleDelte}
 					/>
 				)}
+				<FAB
+					text="+"
+					fabStyle={{ backgroundColor: "#0066ff" }}
+					textStyle={{ color: "#fff" }}
+					onPress={this.toggleModal}
+				/>
 				<AddTodo
 					visible={addModalVisible}
 					onCloseModal={this.toggleModal}
