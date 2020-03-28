@@ -74,7 +74,7 @@ const TodoList = ({ todos, onUpdate, onDelete, onEdit }) => {
 	renderItem = todo => (
 		<TouchableOpacity
 			style={styles.listItem}
-			key={todo.text}
+			key={todo.id}
 			onPress={() => onEdit(todo)}
 		>
 			<CheckBox
