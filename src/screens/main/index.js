@@ -22,13 +22,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: "#fff",
-		alignItems: "center",
-		marginTop: 30
-	},
-	title: {
-		fontSize: 20,
-		fontWeight: "bold",
-		margin: 4
+		alignItems: "center"
 	},
 	loading: {
 		flex: 1
@@ -36,6 +30,10 @@ const styles = StyleSheet.create({
 });
 
 class MainScreen extends Component {
+	static navigationOptions = {
+		title: "ToDo List App"
+	};
+
 	constructor(props) {
 		super(props);
 
@@ -92,9 +90,6 @@ class MainScreen extends Component {
 		const { todos, newTodo, loading, addModalVisible } = this.state;
 		return (
 			<SafeAreaView style={styles.container}>
-				<Text style={styles.title} selectable>
-					ToDo List App
-				</Text>
 				{loading && (
 					<ActivityIndicator
 						style={styles.loading}

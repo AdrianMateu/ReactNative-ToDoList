@@ -1,8 +1,8 @@
-import React from 'react';
-import Main from './src/screens/main'
+import React from "react";
+import AppNavigator from "./src/navigation/AppNavigator";
 
 export default class App extends React.Component {
-  render(){
-    return <Main />;
-  }
+	render() {
+		return <AppNavigator />;
+	}
 }

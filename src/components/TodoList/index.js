@@ -77,10 +77,10 @@ const TodoList = ({ todos, onUpdate, onDelete }) => {
 			key={todo.text}
 			onPress={() => onUpdate({ ...todo, done: !todo.done })}
 		>
-			<CheckBox 
+			<CheckBox
 				checkedCheckBoxColor="#aaa"
-				onClick={()=>{
-					onUpdate({ ...todo, done: !todo.done});
+				onClick={() => {
+					onUpdate({ ...todo, done: !todo.done });
 				}}
 				isChecked={todo.done}
 			/>
