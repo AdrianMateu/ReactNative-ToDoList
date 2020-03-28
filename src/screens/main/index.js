@@ -10,6 +10,7 @@ import {
 	Alert
 } from "react-native";
 import TodoList from "todoList/src/components/TodoList/index";
+import AddTodo from "todoList/src/components/AddTodo/index";
 import {
 	getTodos,
 	addTodo,
@@ -50,7 +51,8 @@ class MainScreen extends Component {
 		this.state = {
 			todos: [],
 			newTodo: null,
-			loading: true
+			loading: true,
+			addModalVisible: false
 		};
 	}
 
@@ -59,9 +61,9 @@ class MainScreen extends Component {
 		this.setState({ todos: todos, loading: false });
 	};
 
-	handleAdd = () => {
-		const { todos, newTodo } = this.state;
-		const newList = addTodo(todos, { text: newTodo });
+	handleAdd = newTodo => {
+		const { todos } = this.state;
+		const newList = addTodo(todos, newTodo);
 		this.setState({ todos: newList, newTodo: null });
 	};
 
@@ -91,8 +93,12 @@ class MainScreen extends Component {
 		this.setState({ todos: newList });
 	};
 
+	toggleModal = () => {
+		this.setState({ addModalVisible: !this.state.addModalVisible });
+	};
+
 	render() {
-		const { todos, newTodo, loading } = this.state;
+		const { todos, newTodo, loading, addModalVisible } = this.state;
 		return (
 			<SafeAreaView style={styles.container}>
 				<Text style={styles.title} selectable>
@@ -108,7 +114,7 @@ class MainScreen extends Component {
 						clearButtonMode="always"
 						returnKeyType="done"
 					/>
-					<Button onPress={this.handleAdd} title="Añadir" />
+					<Button onPress={this.toggleModal} title="Añadir" />
 				</View>
 				{loading && (
 					<ActivityIndicator
@@ -124,6 +130,11 @@ class MainScreen extends Component {
 						onDelete={this.handleDelte}
 					/>
 				)}
+				<AddTodo
+					visible={addModalVisible}
+					onCloseModal={this.toggleModal}
+					onAddTodo={this.handleAdd}
+				/>
 			</SafeAreaView>
 		);
 	}
