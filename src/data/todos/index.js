@@ -6,18 +6,18 @@ const v1options = {
 };
 
 const getTodos = () => [
-	newTodo({ text: "Tarea 1", done: false }),
-	newTodo({ text: "Tarea 2", done: false }),
-	newTodo({ text: "Tarea 3", done: false }),
-	newTodo({ text: "Tarea 4", done: true }),
-	newTodo({ text: "Tarea 5", done: false }),
-	newTodo({ text: "Tarea 6", done: false }),
-	newTodo({ text: "Tarea 7", done: false }),
-	newTodo({ text: "Tarea 8", done: false }),
-	newTodo({ text: "Tarea 9", done: true }),
-	newTodo({ text: "Tarea 10", done: true }),
-	newTodo({ text: "Tarea 11", done: true }),
-	newTodo({ text: "Tarea 12", done: true })
+	// newTodo({ text: "Tarea 1", done: false }),
+	// newTodo({ text: "Tarea 2", done: false }),
+	// newTodo({ text: "Tarea 3", done: false }),
+	// newTodo({ text: "Tarea 4", done: true }),
+	// newTodo({ text: "Tarea 5", done: false }),
+	// newTodo({ text: "Tarea 6", done: false }),
+	// newTodo({ text: "Tarea 7", done: false }),
+	// newTodo({ text: "Tarea 8", done: false }),
+	// newTodo({ text: "Tarea 9", done: true }),
+	// newTodo({ text: "Tarea 10", done: true }),
+	// newTodo({ text: "Tarea 11", done: true }),
+	// newTodo({ text: "Tarea 12", done: true })
 ];
 
 const newTodo = todo => ({

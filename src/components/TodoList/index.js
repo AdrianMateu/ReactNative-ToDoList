@@ -4,8 +4,7 @@ import {
 	View,
 	StyleSheet,
 	TouchableOpacity,
-	ScrollView,
-	FlatList
+	SectionList
 } from "react-native";
 
 const styles = StyleSheet.create({
@@ -55,6 +54,10 @@ const styles = StyleSheet.create({
 		width: "86%",
 		backgroundColor: "#CED0CE",
 		marginLeft: "14%"
+	},
+	sectionHeader: {
+		backgroundColor: "#ddd",
+		padding: 10
 	}
 });
 const TodoList = ({ todos, onUpdate, onDelete }) => {
@@ -87,32 +90,37 @@ const TodoList = ({ todos, onUpdate, onDelete }) => {
 		</View>
 	);
 
+	renderSectionHeader = ({ section: { title, data } }) => (
+		<View style={styles.sectionHeader}>
+			<Text>
+				{title} ({data.length})
+			</Text>
+		</View>
+	);
+
 	return (
-		<FlatList
+		<SectionList
 			style={styles.container}
-			data={todos}
+			sections={
+				todos && todos.length
+					? [
+							{
+								title: "ToDo",
+								data: todos.filter(todo => !todo.done)
+							},
+							{
+								title: "Terminadas",
+								data: todos.filter(todo => todo.done)
+							}
+					  ]
+					: []
+			}
 			keyExtractor={todo => todo.id}
 			renderItem={({ item }) => renderItem(item)}
+			renderSectionHeader={renderSectionHeader}
 			ItemSeparatorComponent={renderSeparator}
 			ListEmptyComponent={renderEmptyComponent}
 		/>
-		// <ScrollView contentContainerStyle={styles.container}>
-		// 	{todos.map(todo => (
-		// 		<TouchableOpacity
-		// 			style={styles.listItem}
-		// 			key={todo.text}
-		// 			onPress={() => onUpdate({ ...todo, done: !todo.done })}
-		// 		>
-		// 			<Text style={styles.bullet}>-</Text>
-		// 			<Text style={[styles.text, todo.done && styles.textDone]}>
-		// 				{todo.text}
-		// 			</Text>
-		// 			<TouchableOpacity style={styles.delete} onPress={() => onDelete(todo)}>
-		// 				<Text style={styles.deleteText}>X</Text>
-		// 			</TouchableOpacity>
-		// 		</TouchableOpacity>
-		// 	))}
-		// </ScrollView>
 	);
 };
 export default TodoList;
