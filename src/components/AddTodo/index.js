@@ -6,7 +6,8 @@ import {
 	TextInput,
 	TouchableOpacity,
 	View,
-	Button
+	Button,
+	Picker
 } from "react-native";
 
 const styles = StyleSheet.create({
@@ -48,6 +49,8 @@ const initialState = {
 	description: "",
 	priority: 0
 };
+
+const priorities = ["Urgente", "Importante", "Normal", "No importante"];
 export default class AddTodo extends Component {
 	constructor(props) {
 		super(props);
@@ -93,11 +96,24 @@ export default class AddTodo extends Component {
 								clearButtonMode="always"
 							/>
 						</View>
+						<View style={styles.block}>
+							<Text>Prioridad</Text>
+							<Picker
+								selectedValue={priority}
+								onValueChange={priority =>
+									this.setState({ priority })
+								}
+							>
+								{priorities.map((item, idx) => (
+									<Picker.Item label={item} value={idx} />
+								))}
+							</Picker>
+						</View>
 						<View style={styles.buttonRow}>
 							<Button
 								title="Cerrar"
 								onPress={onCloseModal}
-								color="#ff000"
+								color="#ff0000"
 							/>
 							<Button title="Añadir" onPress={this.addTodo} />
 						</View>

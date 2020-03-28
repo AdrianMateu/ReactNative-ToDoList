@@ -111,23 +111,30 @@ const TodoList = ({ todos, onUpdate, onDelete }) => {
 		</View>
 	);
 
+	getSectionData = () => {
+		if (todos && todos.length) {
+			return [
+				{
+					title: "ToDo",
+					data: todos
+						.filter(todo => !todo.done)
+						.sort((a, b) => (a.priority < b.priority ? -1 : 1))
+				},
+				{
+					title: "Terminadas",
+					data: todos
+						.filter(todo => todo.done)
+						.sort((a, b) => (a.priority < b.priority ? -1 : 1))
+				}
+			];
+		}
+		return [];
+	};
+
 	return (
 		<SectionList
 			style={styles.container}
-			sections={
-				todos && todos.length
-					? [
-							{
-								title: "ToDo",
-								data: todos.filter(todo => !todo.done)
-							},
-							{
-								title: "Terminadas",
-								data: todos.filter(todo => todo.done)
-							}
-					  ]
-					: []
-			}
+			sections={getSectionData()}
 			keyExtractor={todo => todo.id}
 			renderItem={({ item }) => renderItem(item)}
 			renderSectionHeader={renderSectionHeader}
