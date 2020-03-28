@@ -4,8 +4,10 @@ import {
 	View,
 	StyleSheet,
 	TouchableOpacity,
-	SectionList
+	SectionList,
+	Image
 } from "react-native";
+import deleteImage from "todoList/assets/delete.png";
 
 const styles = StyleSheet.create({
 	container: {
@@ -40,10 +42,6 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center"
 	},
-	deleteText: {
-		color: "#ff0000",
-		fontSize: 18
-	},
 	emptyList: {
 		flex: 1,
 		justifyContent: "center",
@@ -58,8 +56,19 @@ const styles = StyleSheet.create({
 	sectionHeader: {
 		backgroundColor: "#ddd",
 		padding: 10
+	},
+	emptyImage: {
+		width: 42,
+		height: 42,
+		tintColor: "#005500"
+	},
+	trashIcon: {
+		tintColor: "#ff0000",
+		width: 20,
+		height: 20
 	}
 });
+
 const TodoList = ({ todos, onUpdate, onDelete }) => {
 	renderItem = todo => (
 		<TouchableOpacity
@@ -75,7 +84,7 @@ const TodoList = ({ todos, onUpdate, onDelete }) => {
 				style={styles.delete}
 				onPress={() => onDelete(todo)}
 			>
-				<Text style={styles.deleteText}>X</Text>
+				<Image style={styles.trashIcon} source={deleteImage}></Image>
 			</TouchableOpacity>
 		</TouchableOpacity>
 	);
@@ -86,6 +95,10 @@ const TodoList = ({ todos, onUpdate, onDelete }) => {
 
 	renderEmptyComponent = () => (
 		<View style={styles.emptyList}>
+			<Image
+				style={styles.emptyImage}
+				source={require("todoList/assets/check.png")}
+			/>
 			<Text>Lista vacía</Text>
 		</View>
 	);
