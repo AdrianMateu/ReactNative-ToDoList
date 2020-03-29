@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { View, TouchableOpacity, StyleSheet, Image } from "react-native";
 import BasicAddItems from "todoList/src/components/BasicAddItems";
 import saveImage from "todoList/assets/save.png";
 

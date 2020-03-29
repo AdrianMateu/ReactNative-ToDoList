@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import {
 	StyleSheet,
 	Modal,
-	Text,
-	TextInput,
-	TouchableOpacity,
 	View,
-	Button
+	Button,
+	KeyboardAvoidingView,
+	Platform
 } from "react-native";
 import BasicAddItems from "todoList/src/components/BasicAddItems";
 
@@ -80,7 +79,10 @@ export default class AddTodo extends Component {
 				onRequestClose={onCloseModal}
 			>
 				<View style={styles.container}>
-					<View style={styles.content}>
+					<KeyboardAvoidingView
+						style={styles.content}
+						behavior={Platform.OS === "ios" ? "padding" : null}
+					>
 						<BasicAddItems
 							text={text}
 							description={description}
@@ -95,7 +97,7 @@ export default class AddTodo extends Component {
 							/>
 							<Button title="Añadir" onPress={this.addTodo} />
 						</View>
-					</View>
+					</KeyboardAvoidingView>
 				</View>
 			</Modal>
 		);
