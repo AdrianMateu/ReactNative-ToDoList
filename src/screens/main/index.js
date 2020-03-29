@@ -62,7 +62,7 @@ class MainScreen extends Component {
 		this.setState({ todos: newList });
 	};
 
-	handleDelte = todo => {
+	handleDelete = todo => {
 		Alert.alert("¿Quere eliminar tarea?", todo.text, [
 			{
 				text: "Cancelar",
@@ -77,9 +77,6 @@ class MainScreen extends Component {
 				}
 			}
 		]);
-		const { todos } = this.state;
-		const newList = deleteTodo(todos, todo);
-		this.setState({ todos: newList });
 	};
 
 	toggleModal = () => {
@@ -108,7 +105,7 @@ class MainScreen extends Component {
 					<TodoList
 						todos={todos}
 						onUpdate={this.handleUpdate}
-						onDelete={this.handleDelte}
+						onDelete={this.handleDelete}
 						onEdit={this.openEditTodo}
 					/>
 				)}
