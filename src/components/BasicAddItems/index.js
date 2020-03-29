@@ -45,7 +45,7 @@ const priorities = ["Urgente", "Importante", "Normal", "No Importante"];
 const BasicAddItems = ({ text, description, priority, onChange }) => (
 	<React.Fragment>
 		<View style={styles.block}>
-			<Text>Titulo</Text>
+			<Text>Título</Text>
 			<TextInput
 				style={styles.text}
 				value={text}
@@ -54,7 +54,7 @@ const BasicAddItems = ({ text, description, priority, onChange }) => (
 			/>
 		</View>
 		<View style={styles.block}>
-			<Text>Descripcion</Text>
+			<Text>Descripción</Text>
 			<TextInput
 				style={[styles.text, styles.textArea]}
 				value={description}
